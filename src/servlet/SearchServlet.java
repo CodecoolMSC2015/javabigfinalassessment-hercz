@@ -14,13 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public void send(String text) {
+	public void send(String skill, String type) {
 		try {
 			Socket clientSocket = new Socket("localhost", 1555);
 
 			ObjectOutputStream clientOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
 
-			clientOutputStream.writeObject(text);
+			clientOutputStream.writeObject(type);
+			clientOutputStream.writeObject(skill);
 			clientSocket.close();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,14 +37,12 @@ public class SearchServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		skills = (String) request.getParameter("skills");
-		searchType = (String) request.getParameter("searchType");
-		send(skills);
-		send(searchType);
+		skills = request.getParameter("skills");
+		searchType = request.getParameter("searchType");
+		send(skills, searchType);
 
 		out.println(skills + searchType);
 		request.getRequestDispatcher("index.html").include(request, response);
-		send(searchType);
 
 		out.close();
 	}

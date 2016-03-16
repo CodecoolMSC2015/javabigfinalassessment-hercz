@@ -24,7 +24,7 @@ public class PersonStoreServerSocket {
 
 			String searchCriteria = (String) serverInputStream.readObject();
 			String searchType = (String) serverInputStream.readObject();
-			System.out.println(searchCriteria + searchType);
+			System.out.println(searchType + searchCriteria);
 
 			serverInputStream.close();
 			serverOutputStream.close();
