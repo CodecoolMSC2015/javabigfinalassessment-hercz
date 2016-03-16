@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import csvreader.SearchType;
+
 //@WebServlet("/SearchServlet")
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public void send(String skill, String type) {
+	public void sendToServer(String skill, SearchType type) {
 		try {
 			Socket clientSocket = new Socket("localhost", 1555);
 
@@ -32,18 +34,19 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String searchType, skills;
+		String skills, searchTypeString;
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		skills = request.getParameter("skills");
-		searchType = request.getParameter("searchType");
-		send(skills, searchType);
+		searchTypeString = request.getParameter("searchType");
 
-		out.println(skills + searchType);
+		SearchType searchType = SearchType.valueOf(searchTypeString);
+		sendToServer(skills, searchType);
+
 		request.getRequestDispatcher("index.html").include(request, response);
-
+		out.print("Criteria: " + skills + "Searchtype: " + searchType);
 		out.close();
 	}
 

@@ -6,6 +6,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class PersonStoreServerSocket {
+	DataReader store = new CSVDataReader(
+			"C:\\Users\\herczkumihalybalazs\\git\\javabigfinalassessment-hercz\\Documentation\\persons.csv");
 
 	public void start() {
 
@@ -22,9 +24,12 @@ public class PersonStoreServerSocket {
 			ObjectInputStream serverInputStream = new ObjectInputStream(pipe.getInputStream());
 			ObjectOutputStream serverOutputStream = new ObjectOutputStream(pipe.getOutputStream());
 
+			SearchType searchType = (SearchType) serverInputStream.readObject();
 			String searchCriteria = (String) serverInputStream.readObject();
-			String searchType = (String) serverInputStream.readObject();
-			System.out.println(searchType + searchCriteria);
+			System.out.println("Searchtype: " + searchType + " Criteria: " + searchCriteria);
+
+			store.setSearchCriteria(searchCriteria);
+			store.setSearchType(searchType);
 
 			serverInputStream.close();
 			serverOutputStream.close();
@@ -34,11 +39,8 @@ public class PersonStoreServerSocket {
 		}
 	}
 
-	DataReader dataReader = new DataReader() {
-	};
-
 	public static void main(String[] args) {
-		PersonStoreServerSocket p = new PersonStoreServerSocket();
-		p.start();
+		PersonStoreServerSocket objectserver = new PersonStoreServerSocket();
+		objectserver.start();
 	}
 }
