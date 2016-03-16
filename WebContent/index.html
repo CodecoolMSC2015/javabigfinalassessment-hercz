@@ -2,9 +2,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HomePage</title>
 </head>
 <body>
-
+What do you want to do?
+<form action="SearchServlet" method = "post">   
+	<br>Skills:<input type="text" name = "skills"/>	 	
+    <br><input type="radio" name="searchType" value="Mandatory">Mandatory
+	<input type="radio" name="searchType" value="Optional">Optional
+    <br> <input type="submit" value = "Send" /> 
+   </form>
 </body>
 </html>
