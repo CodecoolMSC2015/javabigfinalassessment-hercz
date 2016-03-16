@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class PersonStoreServerSocket {
-	DataReader store = new CSVDataReader(
+	CSVDataReader store = new CSVDataReader(
 			"C:\\Users\\herczkumihalybalazs\\git\\javabigfinalassessment-hercz\\Documentation\\persons.csv");
 
 	public void start() {
@@ -30,6 +30,8 @@ public class PersonStoreServerSocket {
 
 			store.setSearchCriteria(searchCriteria);
 			store.setSearchType(searchType);
+
+			// serverOutputStream.writeObject();
 
 			serverInputStream.close();
 			serverOutputStream.close();

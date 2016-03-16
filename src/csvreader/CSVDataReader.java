@@ -9,6 +9,8 @@ import persondetails.Person;
 public class CSVDataReader extends DataReader {
 	String csvFilePath;
 	Set<Person> persons;
+	private String searhCriteria;
+	private SearchType searchType;
 
 	public CSVDataReader(String csvFilePath) {
 		BufferedReader br = null;
@@ -18,7 +20,11 @@ public class CSVDataReader extends DataReader {
 		try {
 			br = new BufferedReader(new FileReader(csvFilePath));
 			while ((line = br.readLine()) != null) {
-				String[] text = line.split(csvSplitBy);
+				String[] coloumn = line.split(csvSplitBy);
+				if (coloumn[5].equals(searhCriteria)) {
+					persons.add(new Person(coloumn[0], coloumn[1]));
+
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -31,13 +37,12 @@ public class CSVDataReader extends DataReader {
 
 	@Override
 	public void setSearchType(SearchType searchType) {
-		// TODO Auto-generated method stub
-
+		this.searchType = searchType;
 	}
 
 	@Override
 	public void setSearchCriteria(String searchCriteria) {
-		// TODO Auto-generated method stub
+		this.searhCriteria = searchCriteria;
 
 	}
 

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -9,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import csvreader.SearchType;
 
@@ -21,6 +23,7 @@ public class SearchServlet extends HttpServlet {
 			Socket clientSocket = new Socket("localhost", 1555);
 
 			ObjectOutputStream clientOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
+			ObjectInputStream clientinputStream = new ObjectInputStream(clientSocket.getInputStream());
 
 			clientOutputStream.writeObject(type);
 			clientOutputStream.writeObject(skill);
@@ -44,6 +47,10 @@ public class SearchServlet extends HttpServlet {
 
 		SearchType searchType = SearchType.valueOf(searchTypeString);
 		sendToServer(skills, searchType);
+
+		HttpSession session = request.getSession();
+		session.setAttribute("skills", skills);
+		session.setAttribute("searchType", searchTypeString);
 
 		request.getRequestDispatcher("index.html").include(request, response);
 		out.print("Criteria: " + skills + "Searchtype: " + searchType);
