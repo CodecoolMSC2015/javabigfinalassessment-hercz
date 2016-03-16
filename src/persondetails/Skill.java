@@ -1,9 +1,9 @@
 package persondetails;
 
 public class Skill {
-	public String name;
-	public String description;
-	public double rate;
+	private String name;
+	private String description;
+	private double rate;
 
 	public Skill(String name, String description) {
 		this.name = name;

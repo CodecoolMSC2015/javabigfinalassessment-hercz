@@ -3,9 +3,9 @@ package persondetails;
 import java.util.List;
 
 public class Person {
-	public String name;
-	public String email;
-	public List<Skill> skillset;
+	private String name;
+	private String email;
+	private List<Skill> skillset;
 
 	public Person(String name, String email) {
 		this.name = name;

@@ -5,8 +5,8 @@ import java.util.Set;
 import persondetails.Person;
 
 public abstract class DataReader {
-	public String searchCriteria;
-	public SearchType searchType;
+	private String searchCriteria;
+	private SearchType searchType;
 
 	public SearchType getSearchType() {
 		return searchType;
