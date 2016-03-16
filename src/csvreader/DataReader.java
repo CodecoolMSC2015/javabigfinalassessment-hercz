@@ -8,15 +8,9 @@ public abstract class DataReader {
 	private String searchCriteria;
 	private SearchType searchType;
 
-	public SearchType getSearchType() {
-		return searchType;
-	}
+	public abstract void setSearchType(SearchType searchType);
 
-	public void setSearchCriteria(String searchCriteria) {
-		this.searchCriteria = searchCriteria;
-	}
+	public abstract void setSearchCriteria(String searchCriteria);
 
-	public Set<Person> getPersons(String searchCriteria, SearchType searchType) {
-		return null;
-	}
+	public abstract Set<Person> getPersons();
 }

@@ -19,7 +19,6 @@ public class CSVDataReader extends DataReader {
 			br = new BufferedReader(new FileReader(csvFilePath));
 			while ((line = br.readLine()) != null) {
 				String[] text = line.split(csvSplitBy);
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -30,8 +29,16 @@ public class CSVDataReader extends DataReader {
 		return persons;
 	}
 
-	// public static void main(String[] args) {
-	// new CSVDataReader(
-	// "C:\\Users\\herczkumihalybalazs\\git\\javabigfinalassessment-hercz\\Documentation\\persons.csv");
-	// }
+	@Override
+	public void setSearchType(SearchType searchType) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void setSearchCriteria(String searchCriteria) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
